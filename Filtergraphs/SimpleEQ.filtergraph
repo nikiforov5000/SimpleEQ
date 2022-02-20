@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<FILTERGRAPH>
+  <FILTER uid="1" x="0.5" y="0.1">
+    <PLUGIN name="Audio Input" descriptiveName="" format="Internal" category="I/O devices"
+            manufacturer="JUCE" version="1.0" file="" uniqueId="246006c0"
+            isInstrument="0" fileTime="0" infoUpdateTime="0" numInputs="0"
+            numOutputs="2" isShell="0" uid="246006c0"/>
+    <STATE>0.</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="disabled"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="L R"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="2" x="0.2575" y="0.08669354838709678">
+    <PLUGIN name="MIDI Input" descriptiveName="" format="Internal" category="I/O devices"
+            manufacturer="JUCE" version="1.0" file="" uniqueId="a9e4f9eb"
+            isInstrument="0" fileTime="0" infoUpdateTime="0" numInputs="0"
+            numOutputs="0" isShell="0" uid="a9e4f9eb"/>
+    <STATE>0.</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="disabled"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="disabled"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="3" x="0.5" y="0.9">
+    <PLUGIN name="Audio Output" descriptiveName="" format="Internal" category="I/O devices"
+            manufacturer="JUCE" version="1.0" file="" uniqueId="724248cb"
+            isInstrument="0" fileTime="0" infoUpdateTime="0" numInputs="2"
+            numOutputs="0" isShell="0" uid="724248cb"/>
+    <STATE>0.</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="L R"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="disabled"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="4" x="0.25" y="0.9">
+    <PLUGIN name="MIDI Output" descriptiveName="" format="Internal" category="I/O devices"
+            manufacturer="JUCE" version="1.0" file="" uniqueId="9d5bbb00"
+            isInstrument="0" fileTime="0" infoUpdateTime="0" numInputs="0"
+            numOutputs="0" isShell="0" uid="9d5bbb00"/>
+    <STATE>0.</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="disabled"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="disabled"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="6" x="0.4675" y="0.5826612903225806" uiLastX_Normal="224"
+          uiLastY_Normal="322" uiopen_Normal="0" uiLastX_IO="305" uiLastY_IO="146"
+          uiopen_IO="0">
+    <PLUGIN name="SimpleEQ" format="VST3" category="Fx" manufacturer="yourcompany"
+            version="1.0.0" file="C:\Users\Boris\source\repos\JUCE\Projects\SimpleEQ\Builds\VisualStudio2019\x64\Debug\VST3\SimpleEQ.vst3"
+            uniqueId="f5aad7ec" isInstrument="0" fileTime="17f1738e2f7" infoUpdateTime="17f17599082"
+            numInputs="2" numOutputs="2" isShell="0" uid="e954fb44"/>
+    <STATE>191.VMjLgXK....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XCLt3hKt3hKt3hKt3hYRUUSTEETIckVwTjQisVTTgkdEYjKAQjYPQSPWgUdMcjKAQjct3hdA4hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEV77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="L R"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="L R"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="8" x="0.33375" y="0.2842741935483871">
+    <PLUGIN name="Sine Wave Synth" format="Internal" category="Synth" manufacturer="JUCE"
+            version="1.0.0" file="Sine Wave Synth" uniqueId="16fd76a8" isInstrument="1"
+            fileTime="0" infoUpdateTime="0" numInputs="0" numOutputs="2"
+            isShell="0" uid="16fd76a8"/>
+    <STATE>0.</STATE>
+    <LAYOUT>
+      <INPUTS/>
+      <OUTPUTS>
+        <BUS index="0" layout="L R"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <FILTER uid="9" x="0.6587499999999999" y="0.3004032258064516" uiLastX_Normal="88"
+          uiLastY_Normal="154" uiopen_Normal="0">
+    <PLUGIN name="MNoiseGenerator" format="VST3" category="Fx|Tools" manufacturer="MeldaProduction"
+            version="14.16" file="C:\Program Files\Common Files\VST3\MeldaProduction\Tools\MNoiseGenerator.vst3"
+            uniqueId="1eac08eb" isInstrument="0" fileTime="17bcedbda79" infoUpdateTime="17f17599082"
+            numInputs="2" numOutputs="2" isShell="0" uid="ba5cdf9a"/>
+    <STATE>1167.VMjLgXHA...O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9LCNw3xLuMVYREidSI1PCQjQ4PVNUgUShMmZyTmTxklZiA0bHoDNtD1RnQUUtczPgw1XWEmVncUV1LGTzbUYUESUKMmTEUSSKYSaYIWYjcTXNYyaGciZkg1cpsDSYEjUIUDRynGd14VXZMWQwr1UiAmQNEWb1I2L4EzUBUGQsY2LP4DQSgkS1vlUsgTaXEjQP4DMVwTXAoDTN8DSqkVP0cTZusDaFQmLoklMxjCZQckSDYyXOklUPcGQ0MEbD4RV2Y2TWgyc0cSPkgEMO4jXnY1PpUDVFk1a4MDYqXWLD4TLscGRFESYGckMxLWLMgCLPYWYq.0ME4xRhozPHgyL2njQokmVuciVEUDRkYiaQMmXVMzZBMFaCMFaxjEcvzDaxHma4o2QwTzUnoVboMiRs8TZ2giQScFbNMELQoFboUTUXQGSNI2XS0VVgYWSqkzJyEFMkMWQyYWUmcjMxXVNU4BMzQCUTcWXg4FSIcEdqkWS2TVb03zR1sTVvnEanEWbznULqbFbVIiapIEcrkjd0kzZtQERTQkRqIidH4BdxLGTS8FbyEkRXAiTrcybkIDZR8FUtAiRrA0U4U1XvMTM3jjL0zzJ28TTuY0cqASM0XTQyMVYlMFRioDS08DZC8FMIEmMAISdyzzYGMUd4QGbzIzTvD2JCoDLUcSX1UjYAwTZ77RRC8Vav8lak4Fc9vSREQVZzMzatQmbuwFakImOyfSLtLyaiUlTwn2ThMzPDYTNjkSUX0jXyo1L0Ikboo1XPMGRJgiKgsDZTUkaGMTXrM1UwoEZWkkMyAEMWUVUwT0RyIUQ0zzR1zVVxUFYGElS171Q2nVYncmZKwTVAYUREgzL5gmctElVyUTLqc0XvYjSwEmcxMSdAckP0QTa1MCTNQzTX4jMrYUaH0FVAYDTNQiULEVPJAkSOwzZoETcGk1aKwlQzISZoYiL4fVTW4DQ1L1SoYET2QTcSAGQtj0c1M0U3bWc2DTYXQySNIFZlMjZEgkQo8VdCQ1J1ECQNESa2gjQwT1QWYiLyESS3.CT1U1JPcSQtrjXJMDR3LyMJYTZ4o0a2nUQEgTY13VTyIlUCslPiw1PiwlLYQGLMwlLx4Vd5cTLEcEZpEWZynTaOk1c3XzTmAmSSASTpAWZEUEVzwjSxM1TskUX10zZIsxbgQSYyUzb1U0YGYiLlkSUtPCczPEU2EVXtwTRWg2Z40zMkEWMNsjcKkELZwFZwEGMZEyJmAmUx3lZRQGaIoWcIslaTgDUTozZxnGRtfmLyA0TuA2bQoDVvHEa2LWYBglTuQkavnDaPcUdkMFbCUCNIISMMsxcOE0aVc2ZvTSMFUzbiUlYigzXJwTcOg1PuQSRwYSPxj2LMc1QSkWdzAGcBMELwsxPJASU2DlcEYVPLkFOujTQjkFcC8lazI2arwVYx4COuX0TTMCTrU2Yo41TzEFck4C.</STATE>
+    <LAYOUT>
+      <INPUTS>
+        <BUS index="0" layout="L R"/>
+        <BUS index="1" layout="L R"/>
+      </INPUTS>
+      <OUTPUTS>
+        <BUS index="0" layout="L R"/>
+      </OUTPUTS>
+    </LAYOUT>
+  </FILTER>
+  <CONNECTION srcFilter="2" srcChannel="4096" dstFilter="8" dstChannel="4096"/>
+  <CONNECTION srcFilter="6" srcChannel="0" dstFilter="3" dstChannel="0"/>
+  <CONNECTION srcFilter="9" srcChannel="1" dstFilter="3" dstChannel="1"/>
+  <CONNECTION srcFilter="9" srcChannel="0" dstFilter="6" dstChannel="0"/>
+</FILTERGRAPH>
