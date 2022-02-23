@@ -95,54 +95,39 @@ private:
     using Coefficients = Filter::CoefficientsPtr;
     static void updateCoeffitients(Coefficients& old, const Coefficients& replacements);
 
+    template<int Index, typename ChainType, typename CoefficientType>
+    void update(ChainType& chain, CoefficientType& coefficients) {
+        updateCoeffitients(chain.get<Index>().coefficients, coefficients[Index]);
+        chain.setBypassed<Index>(false);
+    }
+    
 
     template<typename ChainType, typename CoefficientType>
-    void updateCutFilter(ChainType& lowCut,
-        const CoefficientType& cutCoefficients,
-        const Slope& lowCutSlope) {
+    void updateCutFilter(ChainType& chain,
+        const CoefficientType& coefficients,
+        const Slope& slope) {
 
-        lowCut.setBypassed<0>(true);
-        lowCut.setBypassed<1>(true);
-        lowCut.setBypassed<2>(true);
-        lowCut.setBypassed<3>(true);
+        chain.setBypassed<0>(true);
+        chain.setBypassed<1>(true);
+        chain.setBypassed<2>(true);
+        chain.setBypassed<3>(true);
 
-        switch (lowCutSlope) {
-            case Slope_12:
+        switch (slope) {
+            case Slope_48:
             {
-                *lowCut.get<0>().coefficients = *cutCoefficients[0];
-                lowCut.setBypassed<0>(false);
-                break;
-            }
-            case Slope_24:
-            {
-                *lowCut.get<0>().coefficients = *cutCoefficients[0];
-                lowCut.setBypassed<0>(false);
-                *lowCut.get<1>().coefficients = *cutCoefficients[1];
-                lowCut.setBypassed<1>(false);
-
-                break;
+                update<3>(chain, coefficients);
             }
             case Slope_36:
             {
-                *lowCut.get<0>().coefficients = *cutCoefficients[0];
-                lowCut.setBypassed<0>(false);
-                *lowCut.get<1>().coefficients = *cutCoefficients[1];
-                lowCut.setBypassed<1>(false);
-                *lowCut.get<2>().coefficients = *cutCoefficients[2];
-                lowCut.setBypassed<2>(false);
-                break;
+                update<2>(chain, coefficients);
             }
-            case Slope_48:
+            case Slope_24:
             {
-                *lowCut.get<0>().coefficients = *cutCoefficients[0];
-                lowCut.setBypassed<0>(false);
-                *lowCut.get<1>().coefficients = *cutCoefficients[1];
-                lowCut.setBypassed<1>(false);
-                *lowCut.get<2>().coefficients = *cutCoefficients[2];
-                lowCut.setBypassed<2>(false);
-                *lowCut.get<3>().coefficients = *cutCoefficients[3];
-                lowCut.setBypassed<3>(false);
-                break;
+                update<1>(chain, coefficients);
+            }
+            case Slope_12:
+            {
+                update<0>(chain, coefficients);
             }
         }
     }
