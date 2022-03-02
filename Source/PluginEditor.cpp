@@ -37,12 +37,29 @@ SimpleEQAudioProcessorEditor::~SimpleEQAudioProcessorEditor()
 //==============================================================================
 void SimpleEQAudioProcessorEditor::paint (juce::Graphics& g)
 {
+    using namespace juce;
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    g.fillAll (Colours::black);
 
-    g.setColour (juce::Colours::white);
-    g.setFont (15.0f);
-    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
+    auto bounds = getLocalBounds();
+    auto responseArea = bounds.removeFromTop(bounds.getHeight() * 0.33);
+
+    auto w = responseArea.getWidth();
+
+    auto& lowcut = monoChain.get<ChainPositions::LowCut>();
+    auto& peak= monoChain.get<ChainPositions::Peak>();
+    auto& hightcut = monoChain.get<ChainPositions::HighCut>();
+
+    auto sampleRate = audioProcessor.getSampleRate();
+
+    std::vector<double> mags;
+
+    mags.resize(w);
+
+    for (int i = 0; i < w; ++i) {
+
+    }
+
 }
 
 void SimpleEQAudioProcessorEditor::resized() {
