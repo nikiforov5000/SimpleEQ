@@ -48,17 +48,69 @@ void SimpleEQAudioProcessorEditor::paint (juce::Graphics& g)
 
     auto& lowcut = monoChain.get<ChainPositions::LowCut>();
     auto& peak= monoChain.get<ChainPositions::Peak>();
-    auto& hightcut = monoChain.get<ChainPositions::HighCut>();
+    auto& highcut = monoChain.get<ChainPositions::HighCut>();
 
     auto sampleRate = audioProcessor.getSampleRate();
 
     std::vector<double> mags;
 
     mags.resize(w);
-
     for (int i = 0; i < w; ++i) {
+        double mag = 1;
+        int freq = mapToLog10(i / w, 20, 20000);
+        if (!monoChain.isBypassed<ChainPositions::Peak>()) {
+            mag *= peak.coefficients->getMagnitudeForFrequency(freq, sampleRate);
+        }
+        if (!lowcut.isBypassed<0>()) {
+            mag *= lowcut.get<0>().coefficients->getMagnitudeForFrequency(freq, sampleRate);
+        }
+        if (!lowcut.isBypassed<1>()) {
+            mag *= lowcut.get<1>().coefficients->getMagnitudeForFrequency(freq, sampleRate);
+        }
+        if (!lowcut.isBypassed<2>()) {
+            mag *= lowcut.get<2>().coefficients->getMagnitudeForFrequency(freq, sampleRate);
+        }
+        if (!lowcut.isBypassed<3>()) {
+            mag *= lowcut.get<3>().coefficients->getMagnitudeForFrequency(freq, sampleRate);
+        }
 
+
+        if (!highcut.isBypassed<0>()) {
+            mag *= highcut.get<0>().coefficients->getMagnitudeForFrequency(freq, sampleRate);
+        }
+        if (!highcut.isBypassed<1>()) {
+            mag *= highcut.get<1>().coefficients->getMagnitudeForFrequency(freq, sampleRate);
+        }
+        if (!highcut.isBypassed<2>()) {
+            mag *= highcut.get<2>().coefficients->getMagnitudeForFrequency(freq, sampleRate);
+        }
+        if (!highcut.isBypassed<3>()) {
+            mag *= highcut.get<3>().coefficients->getMagnitudeForFrequency(freq, sampleRate);
+        }
+
+        mags[i] = Decibels::gainToDecibels(mag);
     }
+
+    Path responseCurve;
+
+    const double outputMin = responseArea.getBottom();
+    const double outputMax = responseArea.getY();
+    auto map = [outputMin, outputMax](double input) {
+        return jmap(input, -24.0, 24.0, outputMin, outputMax);
+    };
+
+    responseCurve.startNewSubPath(responseArea.getX(), map(mags.front()));
+
+    for (size_t i = 1; i < w; ++i) {
+        responseCurve.lineTo(responseArea.getX() + i, map(mags[i]));
+    }
+
+    g.setColour(Colours::darkgrey);
+    g.drawRoundedRectangle(responseArea.toFloat(), 10.f, 5.f);
+
+    g.setColour(Colours::white);
+    g.strokePath(responseCurve, PathStrokeType(2.f));
+    /// OK
 
 }
 
@@ -83,6 +135,17 @@ void SimpleEQAudioProcessorEditor::resized() {
     peakGainSlider.setBounds(bounds.removeFromTop(bounds.getHeight() * 0.5));
     peakQualitySlider.setBounds(bounds);
 }
+
+void SimpleEQAudioProcessorEditor::parameterValueChanged(int parameterIndex, float newValue) {
+    parameterChanged.set(true);
+}
+
+void SimpleEQAudioProcessorEditor::timerCallback() {
+    if (parameterChanged.compareAndSetBool(false, true)) {
+
+    }
+}
+
 
 std::vector<juce::Component*> SimpleEQAudioProcessorEditor::getComps() {
     return {

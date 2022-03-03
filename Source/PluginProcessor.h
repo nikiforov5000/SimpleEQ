@@ -89,11 +89,8 @@ public:
 
 private:
 
-
     MonoChain leftChain;
     MonoChain rightChain;
-
-
 
     void updatePeakFilter(const ChainSettings& chainSettings);
     using Coefficients = Filter::CoefficientsPtr;
@@ -104,7 +101,6 @@ private:
         updateCoeffitients(chain.get<Index>().coefficients, coefficients[Index]);
         chain.setBypassed<Index>(false);
     }
-    
 
     template<typename ChainType, typename CoefficientType>
     void updateCutFilter(ChainType& chain,
