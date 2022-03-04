@@ -27,11 +27,21 @@ SimpleEQAudioProcessorEditor::SimpleEQAudioProcessorEditor (SimpleEQAudioProcess
         addAndMakeVisible(comp);
     }
 
+    const auto& params = audioProcessor.getParameters();
+    for (auto param : params) {
+        param->addListener(this);
+    }
+
+    startTimerHz(60);
+
     setSize (600, 400);
 }
 
-SimpleEQAudioProcessorEditor::~SimpleEQAudioProcessorEditor()
-{
+SimpleEQAudioProcessorEditor::~SimpleEQAudioProcessorEditor() {
+    const auto& params = audioProcessor.getParameters();
+    for (auto param : params) {
+        param->removeListener(this);
+    }
 }
 
 //==============================================================================
@@ -56,8 +66,9 @@ void SimpleEQAudioProcessorEditor::paint (juce::Graphics& g)
 
     mags.resize(w);
     for (int i = 0; i < w; ++i) {
-        double mag = 1;
-        int freq = mapToLog10(i / w, 20, 20000);
+        double mag = 1.f;
+        int freq = mapToLog10(double(i) / double(w), 10.0, 22000.0);
+
         if (!monoChain.isBypassed<ChainPositions::Peak>()) {
             mag *= peak.coefficients->getMagnitudeForFrequency(freq, sampleRate);
         }
@@ -96,7 +107,7 @@ void SimpleEQAudioProcessorEditor::paint (juce::Graphics& g)
     const double outputMin = responseArea.getBottom();
     const double outputMax = responseArea.getY();
     auto map = [outputMin, outputMax](double input) {
-        return jmap(input, -24.0, 24.0, outputMin, outputMax);
+        return jmap(input, -48.0, 48.0, outputMin, outputMax);
     };
 
     responseCurve.startNewSubPath(responseArea.getX(), map(mags.front()));
@@ -142,10 +153,13 @@ void SimpleEQAudioProcessorEditor::parameterValueChanged(int parameterIndex, flo
 
 void SimpleEQAudioProcessorEditor::timerCallback() {
     if (parameterChanged.compareAndSetBool(false, true)) {
+        auto chainSettings = getChainSettings(audioProcessor.apvts);
+        auto peakCoefficients = makePeakFilter(chainSettings, audioProcessor.getSampleRate());
+        updateCoefficients(monoChain.get<ChainPositions::Peak>().coefficients, peakCoefficients);
 
+        repaint();
     }
 }
-
 
 std::vector<juce::Component*> SimpleEQAudioProcessorEditor::getComps() {
     return {
