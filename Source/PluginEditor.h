@@ -21,13 +21,29 @@ struct CustomRotarySlider : juce::Slider {
     }
 };
 
+struct ResponseCurveComponent : juce::Component, juce::AudioProcessorParameter::Listener, juce::Timer {
+    ResponseCurveComponent(SimpleEQAudioProcessor&);
+    ~ResponseCurveComponent();
+    void parameterValueChanged(int parameterIndex, float newValue) override;
+    void parameterGestureChanged(int parameterIndex, bool gestureIsStarting) override { };
+
+    void timerCallback() override;
+
+    void paint (juce::Graphics&) override;
+private:
+    juce::Atomic<bool> parameterChanged{ false };
+    SimpleEQAudioProcessor& audioProcessor;
+
+    MonoChain monoChain;
+
+};
+
 //==============================================================================
 /**
 */
-class SimpleEQAudioProcessorEditor  : public juce::AudioProcessorEditor,
-    juce::AudioProcessorParameter::Listener,
-    juce::Timer
+class SimpleEQAudioProcessorEditor  : public juce::AudioProcessorEditor
 {
+
 public:
     SimpleEQAudioProcessorEditor (SimpleEQAudioProcessor&);
     ~SimpleEQAudioProcessorEditor() override;
@@ -36,18 +52,12 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
 
-    void parameterValueChanged(int parameterIndex, float newValue) override;
-    void parameterGestureChanged(int parameterIndex, bool gestureIsStarting) override { };
-
-    void timerCallback() override;
-
 
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
-    SimpleEQAudioProcessor& audioProcessor;
+    SimpleEQAudioProcessor& audioProcessor; 
 
-    juce::Atomic<bool> parameterChanged{ false };
 
     CustomRotarySlider peakFreqSlider;
     CustomRotarySlider peakGainSlider;
@@ -57,9 +67,10 @@ private:
     CustomRotarySlider lowCutSlopeSlider;
     CustomRotarySlider highCutSlopeSlider;
 
+    ResponseCurveComponent responseCurveComponent;
+
     using APVTS = juce::AudioProcessorValueTreeState;
     using Attachment = APVTS::SliderAttachment;
-    //using Attachment = juce::AudioProcessorValueTreeState::SliderAttachment;
 
     Attachment peakFreqSliderAttachment;
     Attachment peakGainSliderAttachment;
@@ -71,7 +82,6 @@ private:
 
     std::vector<juce::Component*> getComps();
 
-    MonoChain monoChain;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleEQAudioProcessorEditor)
 };
