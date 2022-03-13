@@ -11,6 +11,8 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 
+
+
 struct LookAndFeel : juce::LookAndFeel_V4
 {
     void drawRotarySlider(juce::Graphics&,
@@ -18,7 +20,7 @@ struct LookAndFeel : juce::LookAndFeel_V4
         float sliderPosProportional,
         float rotaryStartAngle,
         float rotaryEndAngle,
-        juce::Slider&) override { }
+        juce::Slider&) override;
 };
 
 struct RotarySlidersWithLabels : juce::Slider { 
@@ -36,7 +38,7 @@ struct RotarySlidersWithLabels : juce::Slider {
         setLookAndFeel(nullptr);
     }
 
-    void paint(juce::Graphics& g) override {};
+    void paint(juce::Graphics& g) override;
     juce::Rectangle<int> getSliderBounds() const;
     int getTextHeight() const { return 14; }
     juce::String getDisplayString() const;
