@@ -1,5 +1,8 @@
 <h1>3-band Stereo Equalizer</h1>
-![GUI](https://i.ibb.co/wQVD28b/simpleEQ.png)
+
+
+<a href="https://ibb.co/fNfmTZK"><img src="https://i.ibb.co/wQVD28b/simpleEQ.png" alt="simpleEQ" border="0"></a>
+
 <h3>VST3 Audio plugin</h3>
 
 * **Low-cut / high-cut filter** 
