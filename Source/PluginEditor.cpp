@@ -225,6 +225,7 @@ void ResponseCurveComponent::timerCallback() {
 
     while (leftChannelFFTDataGenerator.getNumAvailableFFTDataBlocks() > 0) {
         std::vector<float> fftData;
+        // for (auto data : fftData) { DBG(data); }
         if (leftChannelFFTDataGenerator.getFFTData(fftData)) {
             pathProducer.generatePath(fftData, fftBounds, fftSize, binWidth, -48.f);
         }
@@ -330,7 +331,10 @@ void ResponseCurveComponent::paint(juce::Graphics& g)
         responseCurve.lineTo(responseArea.getX() + i, map(mags[i]));
     }
 
-    g.setColour(Colours::blue);
+    leftChannelFFTPath.applyTransform(AffineTransform().translation(responseArea.getX(),
+        responseArea.getY()));
+
+    g.setColour(Colours::skyblue);
     g.strokePath(leftChannelFFTPath, PathStrokeType(1.f));
 
     g.setColour(Colours::darkgrey);

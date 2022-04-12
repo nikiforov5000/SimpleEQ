@@ -108,11 +108,11 @@ struct AnalyzerPathGenerator {
         for (int binNum = 1; binNum < numBins; binNum += pathResolution) {
             y = map(renderData[binNum]);
 
-            jassert(!std::isnan(y) && !std::isinf(y));
+            // jassert(!std::isnan(y) && !std::isinf(y));
 
             if (!std::isnan(y) && !std::isinf(y)) {
                 auto binFreq = binNum * binWidth;
-                auto normalizeBinX = juce::mapFromLog10(binFreq, 1.f, 20000.f);
+                auto normalizeBinX = juce::mapFromLog10(binFreq, 20.f, 20000.f);
                 int binX = std::floor(normalizeBinX * width);
                 p.lineTo(binX, y);
             }
