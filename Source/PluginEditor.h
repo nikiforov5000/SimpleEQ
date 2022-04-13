@@ -219,6 +219,10 @@ struct ResponseCurveComponent :
 
     void paint (juce::Graphics&) override;
     void resized() override;
+
+    void toggleAnalysisEnablement(bool enabled) {
+        shouldShowFFTAnalysis = enabled;
+    }
 private:
     SimpleEQAudioProcessor& audioProcessor;
     juce::Atomic<bool> parameterChanged{ false };
@@ -235,6 +239,8 @@ private:
 
     PathProducer leftPathProducer;
     PathProducer rightPathProducer;
+
+    bool shouldShowFFTAnalysis = true;
 
 };
 
