@@ -37,7 +37,7 @@ struct FFTDataGenerator {
         }
 
         for (int i = 0; i < numBins; ++i) {
-            fftData[i] = juce::Decibels::gainToDecibels(fftData[i], negativeInfinity);
+            fftData[i] = juce::Decibels::gainToDecibels(fftData[i] * 50.f, negativeInfinity);
         }
 
         fftDataFifo.push(fftData);
@@ -184,7 +184,7 @@ struct RotarySlidersWithLabels : juce::Slider {
 struct PathProducer {
     PathProducer(SingleChannelSampleFifo<SimpleEQAudioProcessor::BlockType>& scsf) :
         leftChannelFifo(&scsf) {
-        leftChannelFFTDataGenerator.changeOrder(FFTOrder::order2048);
+        leftChannelFFTDataGenerator.changeOrder(FFTOrder::order8192);
         monoBuffer.setSize(1, leftChannelFFTDataGenerator.getFFTSize());
     }
 

@@ -221,7 +221,6 @@ juce::String RotarySlidersWithLabels::getDisplayString() const {
 
 ResponseCurveComponent::ResponseCurveComponent(SimpleEQAudioProcessor& p) :
     audioProcessor(p),
-    //leftChannelFifo(&audioProcessor.leftChannelFifo)
     leftPathProducer(audioProcessor.leftChannelFifo),
     rightPathProducer(audioProcessor.rightChannelFifo)
 {
@@ -230,12 +229,9 @@ ResponseCurveComponent::ResponseCurveComponent(SimpleEQAudioProcessor& p) :
         param->addListener(this);
     }
 
-    
-
     updateChain();
 
     startTimerHz(60);
-
 }
 
 ResponseCurveComponent::~ResponseCurveComponent() {
@@ -266,7 +262,7 @@ void PathProducer::process(juce::Rectangle<float> fftBounds, double sampleRate) 
                 tempIncomingBuffer.getReadPointer(0, 0),
                 size);
 
-            leftChannelFFTDataGenerator.produceFFTDataForRendering(monoBuffer, -20.f); // -48
+            leftChannelFFTDataGenerator.produceFFTDataForRendering(monoBuffer, -96.f);
         }
     }
 
@@ -275,9 +271,8 @@ void PathProducer::process(juce::Rectangle<float> fftBounds, double sampleRate) 
 
     while (leftChannelFFTDataGenerator.getNumAvailableFFTDataBlocks() > 0) {
         std::vector<float> fftData;
-        // for (auto data : fftData) { DBG(data); }
         if (leftChannelFFTDataGenerator.getFFTData(fftData)) {
-            pathProducer.generatePath(fftData, fftBounds, fftSize, binWidth, -48.f);
+            pathProducer.generatePath(fftData, fftBounds, fftSize, binWidth, -96.f);
         }
     }
 
@@ -295,13 +290,11 @@ void ResponseCurveComponent::timerCallback() {
         rightPathProducer.process(fftBounds, sampleRate);
     }
 
-
     if (parameterChanged.compareAndSetBool(false, true)) {
         updateChain();
-        //repaint();
+        
     }
     repaint();
-
 }
 
 void ResponseCurveComponent::updateChain() {
