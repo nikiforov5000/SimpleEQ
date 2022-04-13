@@ -101,11 +101,11 @@ enum Channel {
          prepared.set(true);
      }
      //==============================================
-     int getNumCompletedBuffersAvailable() const { return audioBufferFifo.getNumAvailableForReading(); }
+     int getNumCompleteBuffersAvailable() const { return audioBufferFifo.getNumAvailableForReading(); }
      bool isPrepared() const { return prepared.get(); }
      int getSize() const { return size.get(); }
      //==============================================
-     bool getAudioBuffer(BlockType buf) { return audioBufferFifo.pull(buf); }
+     bool getAudioBuffer(BlockType& buf) { return audioBufferFifo.pull(buf); }
  private:
      Channel channelToUse;
      int fifoIndex = 0;

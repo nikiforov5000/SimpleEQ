@@ -252,7 +252,7 @@ void ResponseCurveComponent::parameterValueChanged(int parameterIndex, float new
 void PathProducer::process(juce::Rectangle<float> fftBounds, double sampleRate) {
     juce::AudioBuffer<float> tempIncomingBuffer;
 
-    while (leftChannelFifo->getNumCompletedBuffersAvailable() > 0) {
+    while (leftChannelFifo->getNumCompleteBuffersAvailable() > 0) {
         if (leftChannelFifo->getAudioBuffer(tempIncomingBuffer)) {
             auto size = tempIncomingBuffer.getNumSamples();
 
@@ -266,7 +266,7 @@ void PathProducer::process(juce::Rectangle<float> fftBounds, double sampleRate) 
                 tempIncomingBuffer.getReadPointer(0, 0),
                 size);
 
-            leftChannelFFTDataGenerator.produceFFTDataForRendering(monoBuffer, -48.f);
+            leftChannelFFTDataGenerator.produceFFTDataForRendering(monoBuffer, -20.f); // -48
         }
     }
 
@@ -349,7 +349,7 @@ void ResponseCurveComponent::paint(juce::Graphics& g)
     mags.resize(w);
     for (int i = 0; i < w; ++i) {
         double mag = 1.f;
-        double freq = mapToLog10(double(i) / double(w), 10.0, 22000.0);
+        double freq = mapToLog10(double(i) / double(w), 20.0, 20000.0);
 
         if (!monoChain.isBypassed<ChainPositions::Peak>()) {
             mag *= peak.coefficients->getMagnitudeForFrequency(freq, sampleRate);
@@ -394,7 +394,7 @@ void ResponseCurveComponent::paint(juce::Graphics& g)
     const double outputMin = responseArea.getBottom();
     const double outputMax = responseArea.getY();
     auto map = [outputMin, outputMax](double input) {
-        return jmap(input, -48.0, 48.0, outputMin, outputMax);
+        return jmap(input, -24.0, 24.0, outputMin, outputMax);
     };
 
     responseCurve.startNewSubPath(responseArea.getX(), map(mags.front()));
@@ -451,7 +451,7 @@ void ResponseCurveComponent::resized() {
 
     Array<float> xs;
     for (auto f : freqs) {
-        auto normX = mapFromLog10(f, 10.f, 22000.f);
+        auto normX = mapFromLog10(f, 20.f, 20000.f);
         xs.add(left + wighth * normX);
     }
 
@@ -529,8 +529,6 @@ void ResponseCurveComponent::resized() {
         r.setSize(textWidth, fontHeight);
         g.setColour(Colours::lightgrey);
         g.drawFittedText(str, r, juce::Justification::centred, 1);
-
-
     }
 }
 
