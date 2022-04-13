@@ -429,9 +429,9 @@ void ResponseCurveComponent::resized() {
     Graphics g(background);
 
     Array<float> freqs{
-        10, 20, 30, 40, 50,
-        100, 200, 300, 400, 500,
-        1000, 2000, 3000, 4000, 5000,
+        10, 20, 50,
+        100, 200, 500,
+        1000, 2000, 5000,
         10000, 20000
     };
 
@@ -440,12 +440,12 @@ void ResponseCurveComponent::resized() {
     auto right = renderArea.getRight();
     auto top = renderArea.getY();
     auto bottom = renderArea.getBottom();
-    auto wighth = renderArea.getWidth();
-
+    auto width = renderArea.getWidth();
+    
     Array<float> xs;
     for (auto f : freqs) {
         auto normX = mapFromLog10(f, 20.f, 20000.f);
-        xs.add(left + wighth * normX);
+        xs.add(left + width * normX);
     }
 
     g.setColour(Colours::dimgrey);
