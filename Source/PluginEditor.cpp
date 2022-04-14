@@ -573,8 +573,8 @@ SimpleEQAudioProcessorEditor::SimpleEQAudioProcessorEditor (SimpleEQAudioProcess
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
 
-    peakFreqSlider.labels.add({ 0.f, "10 Hz" });
-    peakFreqSlider.labels.add({ 1.f, "22 kHz" });
+    peakFreqSlider.labels.add({ 0.f, "20 Hz" });
+    peakFreqSlider.labels.add({ 1.f, "20 kHz" });
 
     peakGainSlider.labels.add({ 0.f, "-48 dB" });
     peakGainSlider.labels.add({ 1.f, "+48 dB" });
@@ -582,11 +582,11 @@ SimpleEQAudioProcessorEditor::SimpleEQAudioProcessorEditor (SimpleEQAudioProcess
     peakQualitySlider.labels.add({ 0.f, "0.1" });
     peakQualitySlider.labels.add({ 1.f, "30" });
 
-    lowCutFreqSlider.labels.add({ 0.f, "10 Hz" });
-    lowCutFreqSlider.labels.add({ 1.f, "22 kHz" });
+    lowCutFreqSlider.labels.add({ 0.f, "20 Hz" });
+    lowCutFreqSlider.labels.add({ 1.f, "20 kHz" });
 
-    highCutFreqSlider.labels.add({ 0.f, "10 Hz" });
-    highCutFreqSlider.labels.add({ 1.f, "22 kHz" });
+    highCutFreqSlider.labels.add({ 0.f, "20 Hz" });
+    highCutFreqSlider.labels.add({ 1.f, "20 kHz" });
 
     lowCutSlopeSlider.labels.add({ 0.f, "12 dB/Oct" });
     lowCutSlopeSlider.labels.add({ 1.f, "48 dB/Oct" });
@@ -610,7 +610,6 @@ SimpleEQAudioProcessorEditor::SimpleEQAudioProcessorEditor (SimpleEQAudioProcess
             comp->peakFreqSlider.setEnabled(!bypassed);
             comp->peakGainSlider.setEnabled(!bypassed);
             comp->peakQualitySlider.setEnabled(!bypassed);
-
         }
     };
 
@@ -621,6 +620,7 @@ SimpleEQAudioProcessorEditor::SimpleEQAudioProcessorEditor (SimpleEQAudioProcess
             comp->lowCutSlopeSlider.setEnabled(!bypassed);
         }
     };
+
     highcutBypassButton.onClick = [safePtr]() {
         if (auto* comp = safePtr.getComponent()) {
             auto bypassed = comp->highcutBypassButton.getToggleState();
@@ -635,8 +635,7 @@ SimpleEQAudioProcessorEditor::SimpleEQAudioProcessorEditor (SimpleEQAudioProcess
             comp->responseCurveComponent.toggleAnalysisEnablement(enabled);
         }
     };
-
-    setSize (600, 400);
+    setSize (550, 450);
 }
 
 SimpleEQAudioProcessorEditor::~SimpleEQAudioProcessorEditor() {
@@ -671,27 +670,27 @@ void SimpleEQAudioProcessorEditor::resized() {
 
     bounds.removeFromTop(5);
 
-    float hRatio = 25.f / 100.f;
-    auto responseArea = bounds.removeFromTop(bounds.getHeight() * hRatio);
+    float hRatio = 36.f / 100.f;
+    auto responseArea = bounds.removeFromTop(bounds.getHeight() * hRatio); // 36
 
     responseCurveComponent.setBounds(responseArea);
 
 
+
     auto lowCutArea = bounds.removeFromLeft(bounds.getWidth() * 0.33f);
     auto highCutArea = bounds.removeFromRight(bounds.getWidth() * 0.5);
-
-
-    lowcutBypassButton.setBounds(lowCutArea.removeFromTop(25));
-    lowCutFreqSlider.setBounds(lowCutArea.removeFromTop(lowCutArea.getHeight() * 0.5));
+    lowcutBypassButton.setBounds(lowCutArea.removeFromTop(27)); // 27
+    lowCutFreqSlider.setBounds(lowCutArea.removeFromTop(lowCutArea.getHeight() * 0.57f)); // 57
     lowCutSlopeSlider.setBounds(lowCutArea);
 
-    highcutBypassButton.setBounds(highCutArea.removeFromTop(25));
-    highCutFreqSlider.setBounds(highCutArea.removeFromTop(highCutArea.getHeight() * 0.5));
+    highcutBypassButton.setBounds(highCutArea.removeFromTop(27));
+    highCutFreqSlider.setBounds(highCutArea.removeFromTop(highCutArea.getHeight() * 0.57));
     highCutSlopeSlider.setBounds(highCutArea);
 
-    peakBypassButton.setBounds(bounds.removeFromTop(25));
-    peakFreqSlider.setBounds(bounds.removeFromTop(bounds.getHeight() * 0.33));
-    peakGainSlider.setBounds(bounds.removeFromTop(bounds.getHeight() * 0.5));
+    peakBypassButton.setBounds(bounds.removeFromTop(27));
+    peakFreqSlider.setBounds(bounds.removeFromTop(bounds.getHeight() * 0.57f));
+    auto peakArea = bounds.removeFromRight(bounds.getWidth() * 0.5f);
+    peakGainSlider.setBounds(peakArea);
     peakQualitySlider.setBounds(bounds);
 }
 
