@@ -11,6 +11,8 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 
+
+
 enum FFTOrder {
     order2048 = 11, 
     order4096 = 12,
@@ -135,6 +137,7 @@ private:
 
 struct LookAndFeel : juce::LookAndFeel_V4
 {
+
     void drawRotarySlider(juce::Graphics&,
         int x, int y, int width, int height,
         float sliderPosProportional,

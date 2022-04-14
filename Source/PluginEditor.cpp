@@ -26,11 +26,18 @@ void LookAndFeel::drawRotarySlider(juce::Graphics& g,
     auto enabled = slider.isEnabled();
 
 
-    g.setColour(enabled ? Colour(97u, 18u, 167u) : Colours::darkgrey);
+    g.setColour(enabled ? Colour(97u, 128u, 134u) : Colours::darkgrey);
+    //int knobRed = JUCE_LIVE_CONSTANT(0u);
+    //int knobGreen = JUCE_LIVE_CONSTANT(0u);
+    //int knobBlue = JUCE_LIVE_CONSTANT(0u);
+    //g.setColour(enabled ? Colour(knobRed, knobGreen, knobBlue) : Colours::darkgrey);
     g.fillEllipse(bounds);
 
-
-    g.setColour(enabled ? Colour(255u, 154u, 1u) : Colours::grey);
+    g.setColour(enabled ? Colour(183u, 249u, 186u) : Colours::grey);
+    //int notchRed = JUCE_LIVE_CONSTANT(0u);
+    //int notchGreen = JUCE_LIVE_CONSTANT(0u);
+    //int notchBlue = JUCE_LIVE_CONSTANT(0u);
+    //g.setColour(enabled ? Colour(notchRed, notchGreen, notchBlue) : Colours::grey);
     g.drawEllipse(bounds, 1.f);
 
     if (auto* rswl = dynamic_cast<RotarySlidersWithLabels*>(&slider)) {
@@ -59,6 +66,8 @@ void LookAndFeel::drawRotarySlider(juce::Graphics& g,
 
         r.setSize(strWidth + 4, rswl->getTextHeight() + 2);
         r.setCentre(bounds.getCentre());
+
+
 
         g.setColour(Colours::transparentBlack);
         g.fillRect(r);
