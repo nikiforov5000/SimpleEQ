@@ -1,6 +1,8 @@
 <h1>3-band Stereo Equalizer</h1>
 
-<a href="https://ibb.co/TRY3NKg"><img src="https://i.ibb.co/J2mJSxs/Simple-EQ-GUI-Interface-14-04-22.png" alt="Simple-EQ-GUI-Interface-14-04-22" border="0"></a>
+
+<a href="https://ibb.co/y6y382T"><img src="https://i.ibb.co/48TQjky/Simple-EQ-GUI-Interface-14-04-22.png" alt="Simple-EQ-GUI-Interface-14-04-22" border="0"></a>
+
 
 
 <h3>VST3 Audio plugin</h3>
