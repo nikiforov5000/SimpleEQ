@@ -398,18 +398,17 @@ void ResponseCurveComponent::paint(juce::Graphics& g)
 
     if (shouldShowFFTAnalysis) {
         auto leftChannelFFTPath = leftPathProducer.getPath();
-        leftChannelFFTPath.applyTransform(
-            AffineTransform().translation(responseArea.getX(),
-            responseArea.getY()));
+        /*leftChannelFFTPath.applyTransform(
+                    AffineTransform().translation(responseArea.getX(),responseArea.getY()));*/
         g.setColour(Colours::skyblue);
         g.strokePath(leftChannelFFTPath, PathStrokeType(1.f));
 
 
         auto rightChannelFFTPath = rightPathProducer.getPath();
-        rightChannelFFTPath.applyTransform(
-            AffineTransform().translation(responseArea.getX(),
-                responseArea.getY()));
+        /*rightChannelFFTPath.applyTransform(
+                    AffineTransform().translation(responseArea.getX(),responseArea.getY()));*/
         g.setColour(Colours::lightyellow);
+
         g.strokePath(rightChannelFFTPath, PathStrokeType(1.f));
     }
 
