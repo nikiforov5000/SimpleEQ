@@ -262,7 +262,8 @@ void PathProducer::process(juce::Rectangle<float> fftBounds, double sampleRate) 
                 tempIncomingBuffer.getReadPointer(0, 0),
                 size);
 
-            leftChannelFFTDataGenerator.produceFFTDataForRendering(monoBuffer, -96.f);
+            leftChannelFFTDataGenerator.produceFFTDataForRendering(monoBuffer, -117.f);
+            //leftChannelFFTDataGenerator.produceFFTDataForRendering(monoBuffer, JUCE_LIVE_CONSTANT(-96.f)); ///////////////////////////////////////
         }
     }
 
@@ -272,7 +273,8 @@ void PathProducer::process(juce::Rectangle<float> fftBounds, double sampleRate) 
     while (leftChannelFFTDataGenerator.getNumAvailableFFTDataBlocks() > 0) {
         std::vector<float> fftData;
         if (leftChannelFFTDataGenerator.getFFTData(fftData)) {
-            pathProducer.generatePath(fftData, fftBounds, fftSize, binWidth, -96.f);
+            pathProducer.generatePath(fftData, fftBounds, fftSize, binWidth, -41.f);
+            //pathProducer.generatePath(fftData, fftBounds, fftSize, binWidth, JUCE_LIVE_CONSTANT(-96.f));
         }
     }
 
@@ -398,15 +400,15 @@ void ResponseCurveComponent::paint(juce::Graphics& g)
 
     if (shouldShowFFTAnalysis) {
         auto leftChannelFFTPath = leftPathProducer.getPath();
-        /*leftChannelFFTPath.applyTransform(
-                    AffineTransform().translation(responseArea.getX(),responseArea.getY()));*/
+        leftChannelFFTPath.applyTransform(
+                    AffineTransform().translation(responseArea.getX(),responseArea.getY()));
         g.setColour(Colours::skyblue);
         g.strokePath(leftChannelFFTPath, PathStrokeType(1.f));
 
 
         auto rightChannelFFTPath = rightPathProducer.getPath();
-        /*rightChannelFFTPath.applyTransform(
-                    AffineTransform().translation(responseArea.getX(),responseArea.getY()));*/
+        rightChannelFFTPath.applyTransform(
+                    AffineTransform().translation(responseArea.getX(),responseArea.getY()));
         g.setColour(Colours::lightyellow);
 
         g.strokePath(rightChannelFFTPath, PathStrokeType(1.f));
